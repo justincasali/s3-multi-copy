@@ -1,0 +1,2 @@
+https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#object
+https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/s3.html#boto3.s3.transfer.TransferConfig

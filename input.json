@@ -1,0 +1,13 @@
+{
+    "Bucket": "spaghetti-sauce-east",
+    "Key": "Firefox 68.0.2.dmg.copy",
+    "CopySource": {
+        "Bucket": "spaghetti-sauce",
+        "Key": "Firefox 68.0.2.dmg"
+    },
+    "ExtraArgs": {
+        "ServerSideEncryption": "aws:kms",
+        "SSEKMSKeyId": "29955d40-0df8-46ba-bd05-4ce1be13170c",
+        "StorageClass": "GLACIER"
+    }
+}
