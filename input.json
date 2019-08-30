@@ -9,5 +9,6 @@
         "ServerSideEncryption": "aws:kms",
         "SSEKMSKeyId": "29955d40-0df8-46ba-bd05-4ce1be13170c",
         "StorageClass": "GLACIER"
-    }
+    },
+    "SourceRoleArn": "arn:aws:iam::174819876836:role/assume-admin"
 }
