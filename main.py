@@ -3,7 +3,10 @@ import json
 import time
 import sys
 
+from utils import remote_client
+
 s3 = boto3.resource("s3")
+sts = boto3.client("sts")
 
 transfer_config = boto3.s3.transfer.TransferConfig(
     multipart_threshold=5242880,    # 5 MiB
@@ -18,6 +21,11 @@ def s3_copy(parameters):
 
     print("input", parameters)
 
+    if "SourceRoleArn" in parameters:
+        source_client = remote_client(sts, parameters["SourceRoleArn"], "s3")
+    else:
+        source_client = None
+
     obj = s3.Bucket(parameters["Bucket"]).Object(parameters["Key"])
 
     start = time.monotonic()
@@ -26,7 +34,7 @@ def s3_copy(parameters):
         CopySource=parameters["CopySource"],
         ExtraArgs=parameters["ExtraArgs"],
         Callback=callback,
-        # SourceClient=None,        # Optional client for source object access (remote account sts assume role creds)
+        SourceClient=source_client, # The client to be used for operation that may happen at the source object
         Config=transfer_config,
     )
 
