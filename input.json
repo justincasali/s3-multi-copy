@@ -1,9 +1,9 @@
 {
     "Bucket": "spaghetti-sauce-east",
-    "Key": "Firefox 68.0.2.dmg.copy",
+    "Key": "GiB",
     "CopySource": {
         "Bucket": "spaghetti-sauce",
-        "Key": "Firefox 68.0.2.dmg"
+        "Key": "GiB"
     },
     "ExtraArgs": {
         "ServerSideEncryption": "aws:kms",

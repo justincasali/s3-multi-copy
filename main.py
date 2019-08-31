@@ -1,9 +1,12 @@
 import boto3
+import logging
 import json
 import time
 import sys
 
 from utils import remote_client
+
+logging.basicConfig(level=logging.INFO)
 
 s3 = boto3.resource("s3")
 sts = boto3.client("sts")
