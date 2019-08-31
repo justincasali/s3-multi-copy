@@ -1,4 +1,5 @@
 import boto3
+import botocore
 import logging
 import json
 import time
@@ -6,15 +7,18 @@ import sys
 
 from utils import remote_client
 
+threads = 256
+MiB = 1024 ** 2
+
 logging.basicConfig(level=logging.INFO)
 
-s3 = boto3.resource("s3")
+s3 = boto3.resource("s3", config=botocore.config.Config(max_pool_connections=threads))
 sts = boto3.client("sts")
 
 transfer_config = boto3.s3.transfer.TransferConfig(
-    multipart_threshold=5242880,    # 5 MiB
-    multipart_chunksize=5242880,    # 5 MiB
-    max_concurrency=256             # Number of threads, hits connection limit / throughput wall after 128 or so
+    multipart_threshold=5*MiB,  # 5 MiB
+    multipart_chunksize=5*MiB,  # 5 MiB
+    max_concurrency=threads     # Number of threads, should test where max throughput lies
 )
 
 def callback(byte_count):
